@@ -453,7 +453,7 @@
 
 		&:before {
 			@include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
-			background: url('images/overlay.png');
+			// background: url('images/overlay.png');
 			border-radius: _size(border-radius);
 			content: '';
 			display: block;
@@ -1503,6 +1503,21 @@
 	}
 }
 
+//
+
 .font-amatic {
 	font-family: 'Amatic SC', cursive;
+}
+
+iframe, object, embed {
+	max-width: 100%;
+	min-width: 100%;
+}
+
+.google-form {
+	min-height: 540px;
+}
+
+.logo {
+	max-width: 100%;
 }
