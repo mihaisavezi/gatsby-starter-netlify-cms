@@ -1,38 +1,42 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
+    title: "Gatsby Starter - Strata by HTML5 UP",
+    author: "Hunter Chang",
+    description: "A Gatsby.js Starter based on Strata by HTML5 UP"
   },
+  pathPrefix: '/',
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        path: `${__dirname}/src/posts`,
+        name: "posts",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/img`,
-        name: 'images',
-      },
-    },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [],
+        name: `images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     {
-      resolve: 'gatsby-plugin-netlify-cms',
+      resolve: `gatsby-transformer-remark`,
       options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 630,
+            },
+          },
+          "gatsby-remark-copy-linked-files",
+        ],
       },
     },
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sass`
   ],
 }
