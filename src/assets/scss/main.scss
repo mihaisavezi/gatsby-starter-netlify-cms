@@ -3,6 +3,7 @@
 @import 'libs/mixins';
 @import '../css/font-awesome.min.css';
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic");
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
 /*
 	Strata by HTML5 UP
@@ -903,7 +904,7 @@
 		@include vendor('justify-content', 'space-between');
 		background-color:		_palette(accent2, bg);
 		background-attachment:	scroll,								fixed;
-		background-image:		url('images/overlay.png'),			url('../images/bg.jpg');
+		background-image:		url('images/overlay.png'),			url('../images/bg.jpeg');
 		background-position:	top left,							top left;
 		background-repeat:		repeat,								no-repeat;
 		background-size:		auto,								auto 100%;
@@ -912,7 +913,7 @@
 		left: 0;
 		padding: ($size-header-pad * 2) $size-header-pad;
 		position: fixed;
-		text-align: right;
+		text-align: center;
 		top: 0;
 		width: $size-header-width;
 
@@ -935,8 +936,8 @@
 		}
 
 		h1 {
-			color: _palette(accent2, fg);
-			font-size: 1.35em;
+			color: _palette(bg);
+			font-size: 3em;
 			line-height: 1.75em;
 			margin: 0;
 		}
@@ -1206,7 +1207,7 @@
 				width: $size-header-width;
 
 				h1 {
-					font-size: 1.25em;
+					font-size: 3em;
 
 					br {
 						display: none;
@@ -1500,4 +1501,8 @@
 	.\34 u24 {
 		width: 100%;
 	}
+}
+
+.font-amatic {
+	font-family: 'Amatic SC', cursive;
 }
