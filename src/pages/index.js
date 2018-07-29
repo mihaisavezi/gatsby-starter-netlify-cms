@@ -6,27 +6,13 @@ import Helmet from 'react-helmet'
 // import Lightbox from 'react-images'
 import Gallery from '../components/Gallery'
 
-import thumb01 from '../assets/images/thumbs/01.jpg'
-import thumb02 from '../assets/images/thumbs/02.jpg'
-import thumb03 from '../assets/images/thumbs/03.jpg'
-import thumb04 from '../assets/images/thumbs/04.jpg'
-import thumb05 from '../assets/images/thumbs/05.jpg'
-import thumb06 from '../assets/images/thumbs/06.jpg'
-
-import full01 from '../assets/images/fulls/01.jpg'
-import full02 from '../assets/images/fulls/02.jpg'
-import full03 from '../assets/images/fulls/03.jpg'
-import full04 from '../assets/images/fulls/04.jpg'
-import full05 from '../assets/images/fulls/05.jpg'
-import full06 from '../assets/images/fulls/06.jpg'
-
 const DEFAULT_IMAGES = [
-    { id: '1', src: full01, thumbnail: thumb01, caption: 'Photo 1', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
-    { id: '2', src: full02, thumbnail: thumb02, caption: 'Photo 2', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
-    { id: '3', src: full03, thumbnail: thumb03, caption: 'Photo 3', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
-    { id: '4', src: full04, thumbnail: thumb04, caption: 'Photo 4', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
-    { id: '5', src: full05, thumbnail: thumb05, caption: 'Photo 5', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
-    { id: '6', src: full06, thumbnail: thumb06, caption: 'Photo 6', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'}
+    { id: '1', src: null, thumbnail: null, caption: 'Photo 1', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
+    { id: '2', src: null, thumbnail: null, caption: 'Photo 2', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
+    { id: '3', src: null, thumbnail: null, caption: 'Photo 3', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
+    { id: '4', src: null, thumbnail: null, caption: 'Photo 4', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
+    { id: '5', src: null, thumbnail: null, caption: 'Photo 5', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'},
+    { id: '6', src: null, thumbnail: null, caption: 'Photo 6', description: 'Lorem ipsum dolor sit amet nisl sed nullam feugiat.'}
 ];
 
 class HomeIndex extends React.Component {
@@ -44,6 +30,7 @@ class HomeIndex extends React.Component {
         this.gotoPrevious = this.gotoPrevious.bind(this);
         this.openLightbox = this.openLightbox.bind(this);
         this.handleClickImage = this.handleClickImage.bind(this);
+
     }
 
     openLightbox (index, event) {
@@ -76,8 +63,20 @@ class HomeIndex extends React.Component {
     }
 
     render() {
-        const siteTitle = this.props.data.site.siteMetadata.title
-        const siteDescription = this.props.data.site.siteMetadata.description
+
+        const {site, galleryImages} = this.props.data;
+
+        const siteTitle = site.siteMetadata.title;
+        const siteDescription = site.siteMetadata.description;
+
+        const images = galleryImages.edges;
+        images.map((img, index) => {
+            DEFAULT_IMAGES[index].src = img.node.childImageSharp.sizes.src;
+            DEFAULT_IMAGES[index].thumbnail = img.node.childImageSharp.resize.src;
+        });
+
+
+        
 
         return (
             <div>
@@ -118,7 +117,7 @@ class HomeIndex extends React.Component {
                         <h2>Get In Touch</h2>
                         <p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
                         
-                        <iframe className="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSeLPWexAmRphhVVpsfEhYwZE5a6td_RfjHvnf2i0zI4ZA_Mzw/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                        <iframe className="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSeLPWexAmRphhVVpsfEhYwZE5a6td_RfjHvnf2i0zI4ZA_Mzw/viewform?embedded=true" frameBorder="0" marginHeight="0" marginWidth="0">Loading...</iframe>
                         
                         {/* <div className="row">
                             <div className="8u 12u$(small)">
@@ -170,6 +169,27 @@ export const pageQuery = graphql`
                 title
                 description
             }
+        }
+        galleryImages: allFile(
+            filter: {
+                relativePath:{
+                glob:"gallery/*.*"
+                }
+            }
+            ) {
+                edges{
+                node{
+                childImageSharp{
+                    resize(width: 350, height: 250 rotate: 180) {
+                        src
+                    },
+                    sizes(maxWidth: 800) {
+                        src
+                        }
+                    }
+                }
+            }
+            totalCount
         }
     }
 `
