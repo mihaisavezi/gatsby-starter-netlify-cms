@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Starter - Strata by HTML5 UP",
-    author: "Hunter Chang",
-    description: "A Gatsby.js Starter based on Strata by HTML5 UP"
+    title: "Floripedia - Flori de la A la Z",
+    author: "Mihai Popescu",
+    description: "Flori de nu le uita"
   },
   pathPrefix: '/',
   plugins: [

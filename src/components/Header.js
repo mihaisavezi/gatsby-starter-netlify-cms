@@ -11,6 +11,9 @@ class Header extends React.Component {
                     <a href="#" className="image">
                         <img className="logo" src={logo} alt="" />
                     </a>
+                    <h3>
+                        Facem flori in multe culori.
+                    </h3>
                 </div>
                 <Footer />
             </header>
